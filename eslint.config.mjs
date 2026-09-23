@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Cloudflare 이식으로 생긴 생성물/전용 진입점
+    "worker-configuration.d.ts",
+    ".open-next/**",
+    "src/generated/**",
+    "cf/**",
   ]),
 ]);
 

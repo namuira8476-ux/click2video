@@ -1,0 +1,112 @@
+{
+  "id": "fashion-campaign",
+  "name": "패션 캠페인 필름",
+  "tagline": "모델과 제품 사진으로 하이엔드 패션 캠페인 영상을 만듭니다.",
+  "category": "commerce",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 12,
+    "ratio": "16:9"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "16:9",
+      "9:16"
+    ]
+  },
+  "slots": [
+    {
+      "key": "talent",
+      "kind": "image",
+      "label": "모델/인물",
+      "source": "user",
+      "required": true,
+      "hint": "전신 또는 상반신 사진"
+    },
+    {
+      "key": "product",
+      "kind": "image",
+      "label": "제품(의류·가방 등)",
+      "source": "user",
+      "required": true
+    },
+    {
+      "key": "logo",
+      "kind": "image",
+      "label": "로고",
+      "source": "user",
+      "required": false,
+      "hint": "마지막 장면에 한 번 노출"
+    },
+    {
+      "key": "mood",
+      "kind": "image",
+      "label": "무드 레퍼런스",
+      "source": "option",
+      "required": true,
+      "optionKey": "mood"
+    }
+  ],
+  "options": [
+    {
+      "key": "mood",
+      "type": "select",
+      "label": "무드",
+      "values": [
+        {
+          "value": "desert",
+          "label": "사막 하이웨이",
+          "prompt": "a vintage car on a desert highway at late afternoon, restrained 35 mm film texture",
+          "refId": "mood-desert"
+        },
+        {
+          "value": "studio",
+          "label": "화이트 스튜디오",
+          "prompt": "a seamless minimal white studio with severe fashion attitude and fast, rhythmic cuts",
+          "refId": "mood-studio"
+        },
+        {
+          "value": "cyber",
+          "label": "사이버 그런지",
+          "prompt": "a nighttime cyber-grunge scene with VHS glitches, scanlines, light leaks, and orange firelight",
+          "refId": "mood-cyber"
+        }
+      ],
+      "default": "desert"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.mood}} sets the overall mood, location, and film texture. {{ref.talent}} is the talent: preserve their identity, face, and body. {{ref.product}} is the product and must be worn or carried naturally as part of the character's identity. Treat the talent's face, hair, outfit cut, and the product's exact colour and shape as canonical: they must stay identical in every shot, including the opening wide shot.{{#slots.logo}} {{ref.logo}} is the closing brand mark; show it once at the end, unaltered.{{/slots.logo}}\nCreate a premium fashion campaign film set in {{opt.mood.prompt}}. Tone: elevated, cool, and restrained, but lively and fashion-forward, not a narrative film or an e-commerce ad. Keep the story simple: the talent walks, pauses, turns toward camera, and leaves frame with the product. Mix wide, medium, and close-up shots with beat-synced cuts. Original soundtrack that fits the mood.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add subtitles, watermarks, logos, or on-screen text unless explicitly requested above. Do not change the identity of any referenced person. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": true,
+  "sampleInputs": {
+    "talent": "/samples/fashion-campaign/talent.png",
+    "product": "/samples/fashion-campaign/product.png",
+    "logo": "/samples/fashion-campaign/logo.png"
+  },
+  "badges": [
+    "📷4"
+  ]
+}

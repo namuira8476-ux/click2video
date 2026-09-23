@@ -1,0 +1,112 @@
+{
+  "id": "product-360",
+  "name": "제품 360° 리빌",
+  "tagline": "원하는 공간에서 제품을 360도로 천천히 보여 줍니다.",
+  "category": "commerce",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 10,
+    "ratio": "16:9"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "adaptive",
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4",
+      "21:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "product",
+      "kind": "image",
+      "label": "제품 사진",
+      "source": "user",
+      "required": true
+    },
+    {
+      "key": "detail",
+      "kind": "image",
+      "label": "디테일 컷(선택)",
+      "source": "user",
+      "required": false,
+      "hint": "강조하고 싶은 부분의 클로즈업"
+    }
+  ],
+  "options": [
+    {
+      "key": "scene",
+      "type": "select",
+      "label": "공간",
+      "values": [
+        {
+          "value": "office",
+          "label": "모던 오피스",
+          "prompt": "a premium modern office with warm wood and glass"
+        },
+        {
+          "value": "loft",
+          "label": "콘크리트 로프트",
+          "prompt": "a raw concrete loft with a single window light"
+        },
+        {
+          "value": "outdoor",
+          "label": "야외 골든아워",
+          "prompt": "a quiet outdoor setting at golden hour"
+        },
+        {
+          "value": "white",
+          "label": "화이트 스튜디오",
+          "prompt": "a seamless white cyclorama studio"
+        }
+      ],
+      "default": "office"
+    },
+    {
+      "key": "closing",
+      "type": "text",
+      "label": "마무리 카피",
+      "maxLen": 40,
+      "placeholder": "예: Built to last."
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.product}} is the product reference.{{#slots.detail}} {{ref.detail}} shows feature details to highlight.{{/slots.detail}}\nPresent the product in {{opt.scene.prompt}}. Shot 1 is a continuous orbit that completes a full 360 degrees and returns to the starting angle, using truck left + pan right, never a simple spin, with the whole product in frame and correctly exposed the entire time.\nThen cut to short macro views of materials and finishes{{#slots.detail}} and an engineering-style close-up of the details in {{ref.detail}}{{/slots.detail}}: no macro shot lasts longer than 1.5 seconds and the product stays recognisable in every frame — never fill the screen with an out-of-focus texture. End on a wide hero shot in the same room, on the same surface and under the same lighting as the opening, with the product still fully lit and never blown out to white.\nAny label, print or engraving on the product is reproduced exactly as it appears in {{ref.product}}: never invent lettering, micro-text, or a brand mark, and never let a label float as a flat rectangle over a curved surface.\nKeep the direction minimal, cool-toned, professional, and slow-paced.\n{{#opt.closing}}End with the line, exactly: \"{{opt.closing}}\", set in clean negative space that no object crosses.{{/opt.closing}}\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add subtitles, watermarks, logos, invented lettering or micro-text on the product. Do not add wires, cords, or vertical lines aligned with the product. Do not blow highlights out to pure white. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "product": "/samples/product-360/product.png",
+    "detail": "/samples/product-360/detail.png"
+  },
+  "badges": [
+    "📷2"
+  ],
+  "sampleOptions": {
+    "closing": "Built to last."
+  }
+}

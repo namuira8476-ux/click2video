@@ -1,0 +1,64 @@
+{
+  "id": "macro-cut",
+  "name": "재료에서 완성까지 한 컷",
+  "tagline": "원두 접사가 크레마로, 반죽이 빵으로. 컷 없이 질감이 밀려 들어가는 6초 매크로 전환.",
+  "category": "effects",
+  "mode": "first-last",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 6,
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "ratios": [
+      "adaptive"
+    ]
+  },
+  "slots": [
+    {
+      "key": "from",
+      "kind": "image",
+      "label": "재료 접사",
+      "source": "user",
+      "required": true,
+      "hint": "질감이 꽉 찬 클로즈업 (원두·반죽·원단·꽃잎)"
+    },
+    {
+      "key": "to",
+      "kind": "image",
+      "label": "완성품 접사",
+      "source": "user",
+      "required": true,
+      "hint": "재료와 결이 비슷한 질감일수록 매끄럽게 이어집니다"
+    }
+  ],
+  "options": [
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200,
+      "placeholder": "예: 김이 살짝 피어오르게"
+    }
+  ],
+  "prompt": "Image 1 is the exact opening frame and Image 2 is the exact closing frame.\nOne continuous macro shot with no visible edit. Seconds 0–2: push in slowly on the surface of Image 1 until the grains, ridges and highlights of a single element fill the frame. Seconds 2–4: that surface softens and re-forms, its grain becoming the fine, even structure of Image 2 — a gradual, gentle handoff in which the material keeps the matte, velvety, finely textured surface quality of Image 2 throughout. Seconds 4–6: ease back out until Image 2 is fully revealed and holds still.\nExtremely shallow depth of field, fine particles drifting through soft backlight, photoreal, quiet and restrained. Sound: intimate close-mic texture sounds that blend from the first material into the second.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "No cuts, dissolves, or black frames. No liquid pouring or rising over the subject. No text, watermarks, logos, hands, or people. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "from": "/samples/macro-cut/beans.png",
+    "to": "/samples/macro-cut/crema.png"
+  },
+  "badges": [
+    "📷2"
+  ]
+}

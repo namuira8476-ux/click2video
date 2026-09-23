@@ -1,0 +1,141 @@
+{
+  "items": [
+    {
+      "id": "doodle-apricot",
+      "kind": "image",
+      "file": "doodle/apricot.png",
+      "label": "살구빛 낙서",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "id": "doodle-pink",
+      "kind": "image",
+      "file": "doodle/pink.png",
+      "label": "핑크 브러시",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "id": "doodle-chalk",
+      "kind": "image",
+      "file": "doodle/chalk.png",
+      "label": "화이트 초크",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "id": "mood-desert",
+      "kind": "image",
+      "file": "mood/desert.png",
+      "label": "사막 하이웨이",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "mood-studio",
+      "kind": "image",
+      "file": "mood/studio.png",
+      "label": "화이트 스튜디오",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "mood-cyber",
+      "kind": "image",
+      "file": "mood/cyber.png",
+      "label": "사이버 그런지",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "dance-digiri",
+      "kind": "video",
+      "file": "dance/dance-digiri.mp4",
+      "label": "디기리 챌린지",
+      "durationSec": 10,
+      "width": 768,
+      "height": 1366
+    },
+    {
+      "id": "dance-choesan",
+      "kind": "video",
+      "file": "dance/dance-choesan.mp4",
+      "label": "최산댄스",
+      "durationSec": 10,
+      "width": 768,
+      "height": 1366
+    },
+    {
+      "id": "dance-slickback",
+      "kind": "video",
+      "file": "dance/dance-slickback.mp4",
+      "label": "슬릭백",
+      "durationSec": 8,
+      "width": 768,
+      "height": 1366
+    },
+    {
+      "id": "dance-kpop-point",
+      "kind": "video",
+      "file": "dance/dance-kpop-point.mp4",
+      "label": "K-pop 포인트 안무",
+      "durationSec": 10,
+      "width": 768,
+      "height": 1366
+    },
+    {
+      "id": "dance-hiphop-freestyle",
+      "kind": "video",
+      "file": "dance/dance-hiphop-freestyle.mp4",
+      "label": "힙합 프리스타일",
+      "durationSec": 10,
+      "width": 768,
+      "height": 1366
+    },
+    {
+      "id": "meme-capybara",
+      "kind": "video",
+      "file": "meme/meme-capybara.mp4",
+      "label": "카피바라 피라미드",
+      "durationSec": 8,
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "id": "meme-office-dance",
+      "kind": "video",
+      "file": "meme/meme-office-dance.mp4",
+      "label": "사무실 댄스 브레이크",
+      "durationSec": 8,
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "id": "stock-walk",
+      "kind": "video",
+      "file": "stock/stock-walk.mp4",
+      "label": "거리 워킹 (무지 티셔츠)",
+      "durationSec": 5,
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "stock-table",
+      "kind": "video",
+      "file": "stock/stock-table.mp4",
+      "label": "카페 테이블 (무지 머그컵)",
+      "durationSec": 5,
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "notice-staged",
+      "kind": "image",
+      "file": "notice/staged.png",
+      "label": "연출 영상 안내",
+      "width": 1024,
+      "height": 512
+    }
+  ]
+}

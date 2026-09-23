@@ -1,26 +1,66 @@
 {
   "name": "click2video",
   "version": "0.1.0",
+  "license": "CC-BY-NC-4.0",
+  "engines": {
+    "node": ">=22"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "check-key": "tsx scripts/check-key.ts",
+    "mock-video": "tsx scripts/fetch-mock-video.ts",
+    "samples": "tsx scripts/gen-samples.ts",
+    "previews": "tsx scripts/gen-previews.ts",
+    "refs": "tsx scripts/gen-refs.ts",
+    "setup": "npm run mock-video && npm run samples",
+    "clips": "tsx scripts/gen-sample-clips.ts",
+    "e2e": "tsx scripts/e2e-samples.ts",
+    "promote": "tsx scripts/promote-previews.ts",
+    "compress-previews": "tsx scripts/compress-previews.ts",
+    "bundle-static": "tsx scripts/bundle-static.ts",
+    "prebuild": "tsx scripts/bundle-static.ts",
+    "cf:build": "tsx scripts/cf-deploy.ts build",
+    "cf:deploy": "tsx scripts/cf-deploy.ts deploy",
+    "cf:preview": "opennextjs-cloudflare preview",
+    "cf:enable-r2": "tsx scripts/enable-r2.ts",
+    "export-skill": "tsx scripts/export-skill-library.ts",
+    "cf:secret": "tsx scripts/cf-deploy.ts secret",
+    "cf:migrate": "tsx scripts/cf-deploy.ts migrate"
   },
   "dependencies": {
+    "@fal-ai/client": "^1.10.1",
+    "better-sqlite3": "^13.0.3",
+    "drizzle-orm": "^0.45.2",
+    "mustache": "^4.2.0",
     "next": "16.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "sharp": "^0.35.4",
+    "swr": "^2.5.1",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.6",
     "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/mustache": "^4.2.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.23.13",
+    "typescript": "^5",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.129.0"
   }
 }

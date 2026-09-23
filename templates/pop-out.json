@@ -1,0 +1,88 @@
+{
+  "id": "pop-out",
+  "name": "포스터 밖으로 튀어나오기",
+  "tagline": "간판·로고 포스터 속에서 제품이나 반려동물이 튀어나왔다 돌아갑니다. 릴스용 8초.",
+  "category": "smallbiz",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 8,
+    "ratio": "9:16"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "ratios": [
+      "9:16",
+      "1:1",
+      "16:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "poster",
+      "kind": "image",
+      "label": "로고·간판 포스터",
+      "source": "user",
+      "required": true,
+      "hint": "글자가 적고 여백이 넓은 것. 상호 한 줄 정도가 안전합니다"
+    },
+    {
+      "key": "subject",
+      "kind": "image",
+      "label": "튀어나올 제품·반려동물 사진",
+      "source": "user",
+      "required": true,
+      "hint": "배경이 단순한 정면 사진"
+    }
+  ],
+  "options": [
+    {
+      "key": "space",
+      "type": "select",
+      "label": "포스터가 걸린 곳",
+      "values": [
+        {
+          "value": "wall",
+          "label": "가게 벽",
+          "prompt": "the poster hangs on a warm, softly lit shop wall"
+        },
+        {
+          "value": "white",
+          "label": "흰 배경 (깔끔)",
+          "prompt": "the poster floats on a clean seamless white studio background"
+        },
+        {
+          "value": "street",
+          "label": "거리 게시판",
+          "prompt": "the poster is pinned on an outdoor notice board on a sunny street"
+        }
+      ],
+      "default": "wall"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.poster}} is a flat printed poster and {{ref.subject}} is the character. Setting: {{opt.space.prompt}}.\nAt every moment the poster stays a flat printed sheet showing exactly the same logo and lettering as Image 1 — it must never turn into a window, doorway, hole, mirror, dark opening, or a view into another room, even while the character is outside it. In beat 1 the character sits in the empty area below the logo and never covers the logo or the lettering.\nThree beats, one continuous shot with a locked-off camera and no cuts:\n1. Open on the poster hanging flat, exactly as printed. The character from {{ref.subject}} appears inside the poster's frame, grips the frame's edge with the poster's flat graphic look, and leans its head and body out into the real space, becoming three-dimensional as it crosses the edge.\n2. It springs fully out of the poster, lands in front of it with a soft bounce and a small shadow on the surface below, looks at the camera for a beat, and does one playful action.\n3. It hops back into the poster and settles into place, turning flat again; the poster returns to exactly its original printed state and holds for the last second.\nThe poster's lettering must remain exactly as printed at every moment — never redrawn, restyled, or replaced; no new text anywhere. Preserve the character's identity, colors and proportions from {{ref.subject}}. Photoreal, light playful sound design with a soft pop when it exits and re-enters.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not alter, add, or remove any lettering on the poster. The poster must not become a window, hole, mirror or opening. Do not move the camera. Do not add other characters. No watermarks or logos. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": true,
+  "sampleInputs": {
+    "poster": "/samples/pop-out/poster.png",
+    "subject": "/samples/style-transform/subject.png"
+  },
+  "badges": [
+    "📷2"
+  ]
+}

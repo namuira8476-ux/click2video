@@ -1,0 +1,107 @@
+{
+  "id": "landing-motion",
+  "name": "나이키 스타일 제품 랜딩페이지",
+  "tagline": "제품 사진 한 장으로 거대한 헤드라인이 스치는 랜딩페이지 데모 영상을 만듭니다. 한국어 헤드라인 가능.",
+  "category": "commerce",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 10,
+    "ratio": "16:9"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "21:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "hero",
+      "kind": "image",
+      "label": "제품 사진",
+      "source": "user",
+      "required": true,
+      "hint": "배경이 깨끗한 제품 컷이 가장 좋습니다 (예: 운동화)"
+    },
+    {
+      "key": "headImg",
+      "kind": "image",
+      "label": "헤드라인",
+      "source": "textImage",
+      "required": false,
+      "optionKey": "headline",
+      "textStyle": "dark"
+    }
+  ],
+  "options": [
+    {
+      "key": "headline",
+      "type": "text",
+      "label": "헤드라인 (선택, 한국어 가능)",
+      "maxLen": 24,
+      "placeholder": "예: 속도를 해방하라 / UNLEASH SPEED"
+    },
+    {
+      "key": "brand",
+      "type": "select",
+      "label": "브랜드 스타일",
+      "values": [
+        {
+          "value": "sport",
+          "label": "스포츠·스피드 (나이키풍)",
+          "prompt": "oversized bold italic sans-serif typography, speed-driven light streaks, dark carbon-fiber and performance-mesh textures on a consistently dark background, fast powerful scrolling and high-impact hover interactions with scale-ups and color inversion"
+        },
+        {
+          "value": "luxury",
+          "label": "럭셔리·세리프",
+          "prompt": "elegant serif typography, ivory and charcoal palette, slow smooth scrolling, refined hover states with gentle underlines and fades"
+        },
+        {
+          "value": "tech",
+          "label": "테크·다크 글래스",
+          "prompt": "dark glassmorphism panels, thin monospaced labels, a subtle grid, smooth scroll with parallax layers and glowing cursor hover states"
+        }
+      ],
+      "default": "sport"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.hero}} is the product reference; preserve its exact shape, colors, materials, and details, including the exact shape of its side stripe or accent — never add a swoosh, tick, or any brand mark that is not in {{ref.hero}}.{{#slots.headImg}} {{ref.headImg}} shows the exact headline text. This content must be interpreted as an image, not processed as text; reproduce every character exactly as drawn.{{/slots.headImg}}\nCreate a dynamic product-landing-page UI/UX demo built around the product in {{ref.hero}}. Use {{opt.brand.prompt}}. Open on the hero section where the product floats large over the background;{{#slots.headImg}} the headline from {{ref.headImg}} sweeps in as gigantic typography, and although the product overlaps it, at least one full second shows every character of the headline unobstructed;{{/slots.headImg}}{{^slots.headImg}} the headline area is shown only as solid greeked placeholder bars;{{/slots.headImg}} then a smooth, fast, powerful scroll through two more sections (feature detail, colorway grid) with cursor-driven hover interactions, and a return to the hero.\nEvery other piece of interface copy — the navigation bar, logo area, buttons, captions, product-card labels and prices — is rendered as solid greeked placeholder bars and simple geometric icons: absolutely no letterforms, words, numbers, or invented logos anywhere outside the headline. Keep every section on the same background and visual system as the hero; never cut to a white page. Recolored product variants keep the exact silhouette and stripe shape of {{ref.hero}}. Subtle UI sound design and a driving electronic beat, mixed with headroom and no clipping.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add real brand logos, swoosh shapes, or trademarked names. Do not render any readable text other than the headline described above — all other copy is greeked placeholder bars. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "hero": "/samples/landing-motion/hero.png"
+  },
+  "badges": [
+    "📷1",
+    "✍️"
+  ],
+  "sampleOptions": {
+    "headline": "속도를 해방하라"
+  }
+}

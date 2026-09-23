@@ -1,0 +1,12 @@
+# 운영체제와 무관하게 저장소 안의 텍스트는 LF 로 둔다
+* text=auto eol=lf
+
+# 바이너리
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.mp4 binary
+*.mov binary
+*.wav binary
+*.mp3 binary

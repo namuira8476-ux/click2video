@@ -1,0 +1,115 @@
+{
+  "id": "background-swap",
+  "name": "배경 교체 + 자동 조명",
+  "tagline": "영상의 배경만 바꾸고 조명까지 새 공간에 맞춰 줍니다.",
+  "category": "edit",
+  "defaults": {
+    "resolution": "768P",
+    "duration": "clip",
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "adaptive",
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4",
+      "21:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "clip",
+      "kind": "video",
+      "label": "영상",
+      "source": "user",
+      "required": true,
+      "hint": "그린스크린이 있으면 더 깔끔해집니다"
+    }
+  ],
+  "options": [
+    {
+      "key": "background",
+      "type": "select",
+      "label": "새 배경",
+      "values": [
+        {
+          "value": "office",
+          "label": "밝은 오피스",
+          "prompt": "a bright modern office with window blinds and glass partitions"
+        },
+        {
+          "value": "beach",
+          "label": "한낮의 해변",
+          "prompt": "a sunny beach at midday with soft waves"
+        },
+        {
+          "value": "neon-city",
+          "label": "비 오는 네온 도시",
+          "prompt": "a rainy neon-lit city street at night"
+        },
+        {
+          "value": "forest",
+          "label": "안개 낀 소나무 숲",
+          "prompt": "a misty pine forest in the morning"
+        },
+        {
+          "value": "fairytale",
+          "label": "동화 속 초원",
+          "prompt": "a dreamy fairy-tale meadow with floating lights"
+        },
+        {
+          "value": "custom",
+          "label": "직접 입력"
+        }
+      ],
+      "default": "office"
+    },
+    {
+      "key": "customText",
+      "type": "text",
+      "label": "배경 직접 입력",
+      "maxLen": 80,
+      "placeholder": "예: a cozy library with warm lamps",
+      "required": true,
+      "showWhen": {
+        "key": "background",
+        "equals": "custom"
+      }
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "Use {{ref.clip}} as the sole video source. If a green screen is present, remove it cleanly. Replace the entire background with {{#opt.customText}}{{opt.customText}}{{/opt.customText}}{{^opt.customText}}{{opt.background.prompt}}{{/opt.customText}}.\nKeep the subject's appearance, movement, timing, and the camera's motion completely unchanged. Preserve the original framing and crop exactly; the subject's full head and shoulders must stay inside the frame. Every background element must respond correctly to the camera movement and parallax. Relight the subject so its lighting direction, color temperature, shadows, and edge light match the new environment. Sound: natural ambience that matches the new environment, with the subject's voice re-created to match their lip movement.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add subtitles, watermarks, logos, or on-screen text unless explicitly requested above. Do not change the identity of any referenced person. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "clip": "/samples/clips/greenscreen-wave.mp4"
+  },
+  "badges": [
+    "🎬1"
+  ]
+}

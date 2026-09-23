@@ -1,0 +1,124 @@
+{
+  "id": "event-notice",
+  "name": "이벤트·할인 안내",
+  "tagline": "가게 사진 위에 한국어 이벤트 문구가 움직이는 타이포 광고를 만듭니다.",
+  "category": "smallbiz",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 8,
+    "ratio": "9:16"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      15
+    ],
+    "ratios": [
+      "9:16",
+      "16:9",
+      "1:1"
+    ]
+  },
+  "slots": [
+    {
+      "key": "store",
+      "kind": "image",
+      "label": "가게·상품 사진",
+      "source": "user",
+      "required": true
+    },
+    {
+      "key": "eventImg",
+      "kind": "image",
+      "label": "이벤트 문구",
+      "source": "textImage",
+      "required": true,
+      "optionKey": "eventText",
+      "textStyle": "dark"
+    },
+    {
+      "key": "periodImg",
+      "kind": "image",
+      "label": "기간",
+      "source": "textImage",
+      "required": false,
+      "optionKey": "period",
+      "textStyle": "dark"
+    }
+  ],
+  "options": [
+    {
+      "key": "eventText",
+      "type": "text",
+      "label": "이벤트 문구 (한국어 가능)",
+      "maxLen": 40,
+      "required": true,
+      "placeholder": "예: 오픈 기념 전 메뉴 20% 할인"
+    },
+    {
+      "key": "period",
+      "type": "text",
+      "label": "기간·조건 (선택)",
+      "maxLen": 30,
+      "placeholder": "예: 9월 한 달간"
+    },
+    {
+      "key": "accent",
+      "type": "select",
+      "label": "포인트 컬러",
+      "values": [
+        {
+          "value": "lime",
+          "label": "라임",
+          "prompt": "electric lime green"
+        },
+        {
+          "value": "red",
+          "label": "레드",
+          "prompt": "deep red"
+        },
+        {
+          "value": "gold",
+          "label": "골드",
+          "prompt": "warm gold"
+        },
+        {
+          "value": "blue",
+          "label": "블루",
+          "prompt": "electric blue"
+        }
+      ],
+      "default": "lime"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.store}} is the background footage reference: animate it as a slow cinemagraph (gentle push-in, subtle light shift), preserving its content exactly.\n{{ref.eventImg}} shows the exact announcement text. This content must be interpreted as an image, not processed as text; reproduce every character exactly as drawn.{{#slots.periodImg}} {{ref.periodImg}} shows the exact period line and must be reproduced the same way.{{/slots.periodImg}}\nCreate a {{duration}}-second kinetic-typography promotion for a local business. Over the darkened, slightly blurred background from {{ref.store}}, the announcement text from {{ref.eventImg}} slams in word by word on the beat in bold white sans-serif with {{opt.accent.prompt}} accents: letters scale up, snap into place, and settle. Hold the complete announcement, large and centered, for the final 3 seconds{{#slots.periodImg}} with the period line from {{ref.periodImg}} below it in a smaller size{{/slots.periodImg}}. Add a short punchy sound design and an upbeat rhythmic track. Vertical framing for mobile.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add watermarks, logos, or any text other than the announcement and period described above. Do not misspell or alter the characters. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "store": "/samples/event-notice/store.png"
+  },
+  "badges": [
+    "📷1",
+    "✍️"
+  ],
+  "sampleOptions": {
+    "eventText": "오픈 기념 전 상품 20% 할인",
+    "period": "9월 한 달간"
+  }
+}

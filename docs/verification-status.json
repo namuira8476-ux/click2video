@@ -1,0 +1,124 @@
+{
+  "_comment": "템플릿별 최종 판정(판정자+반박자). previewWorthy 는 export 시 public/samples/<id>/preview.mp4 존재로 계산한다. 재검증하면 여기만 고친다.",
+  "background-swap": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "black-studio-launch": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "owner-greeting": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "event-notice": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "menu-spotlight": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "korean-typo": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "meme-recreate": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "product-360": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "style-transform": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "ar-magic": {
+    "verdict": "partial",
+    "date": "2026-09-05",
+    "note": "AR 오버레이는 정확하나 배경 건물·동선이 일부 재연출됨(제약 #13)"
+  },
+  "relight": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "landing-motion": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "voice-clone-dub": {
+    "verdict": "partial",
+    "date": "2026-09-05",
+    "note": "전사는 지정 대사와 일치, 음색 유사도는 판정자 partial"
+  },
+  "store-promo": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "fashion-campaign": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "hand-drawn-fx": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "dance-transfer": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "note": ""
+  },
+  "before-after": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "jobId": "job_tp8iz59unr4d",
+    "note": "첫/끝 프레임 6초, BEFORE/AFTER 정확"
+  },
+  "season-swap": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "jobId": "job_ka85pfwveumc",
+    "note": "간판 '카페 봄날' 보존, 안내 띠는 하단 중앙 박스로 렌더"
+  },
+  "poster-motion": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "jobId": "job_jqyl6nf8181e",
+    "note": "첫 프레임 '글자 숨김' 지시 추가 후 pass; 이후 시간 예산(#18) 추가분은 미재검증"
+  },
+  "wear-swap": {
+    "verdict": "pass",
+    "date": "2026-09-05",
+    "jobId": "job_743dwvtbaj55",
+    "note": "색을 말로 고정(#15)한 재실행본을 육안 확인 후 승격(2인 판정은 1차 partial 본만)"
+  },
+  "pop-out": {
+    "verdict": "partial",
+    "date": "2026-09-05",
+    "jobId": "job_t6rqcurfuwe1",
+    "note": "캐릭터가 나간 동안 포스터가 창문·구멍으로 변함. 평면 유지 규칙 추가본 미재검증"
+  },
+  "macro-cut": {
+    "verdict": "partial",
+    "date": "2026-09-05",
+    "jobId": "job_qgxifwpmpqcf",
+    "note": "중간 2초가 광택 캐러멜 액체(부정 형용사 역효과, #17). 긍정문으로 고친 본은 미재검증"
+  }
+}

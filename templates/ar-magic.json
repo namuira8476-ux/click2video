@@ -1,0 +1,94 @@
+{
+  "id": "ar-magic",
+  "name": "AR 매직",
+  "tagline": "촬영한 영상 위에 AR 이펙트를 그대로 합성합니다.",
+  "category": "effects",
+  "defaults": {
+    "resolution": "768P",
+    "duration": "clip",
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "adaptive",
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4",
+      "21:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "clip",
+      "kind": "video",
+      "label": "영상",
+      "source": "user",
+      "required": true,
+      "hint": "2~15초 mp4/mov"
+    }
+  ],
+  "options": [
+    {
+      "key": "style",
+      "type": "select",
+      "label": "AR 스타일",
+      "values": [
+        {
+          "value": "hologram",
+          "label": "홀로그램 UI",
+          "prompt": "Overlay translucent holographic UI panels, abstract glyph bars and icons (no readable letters or numbers), and light-blue scan lines anchored to real surfaces, as if the phone is running a futuristic AR app."
+        },
+        {
+          "value": "comedy",
+          "label": "코미디 이펙트",
+          "prompt": "Add exaggerated cartoon-physics visual effects that react to the real motion: impact stars, speed lines, oversized emoji-like reactions, and playful sound effects, in the style of a viral short-form comedy clip."
+        },
+        {
+          "value": "nature",
+          "label": "자연 파티클",
+          "prompt": "Add glowing particles, drifting petals, and small luminous butterflies that follow the real motion and cast soft light on nearby surfaces."
+        },
+        {
+          "value": "glitch",
+          "label": "사이버 글리치",
+          "prompt": "Add cyberpunk AR glitches: chromatic aberration bursts, datamosh smears, and neon wireframes tracing the edges of real objects, synced to a subtle electronic pulse."
+        }
+      ],
+      "default": "hologram"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "Use {{ref.clip}} as the sole video source. Preserve the real camera footage exactly: the environment, people, natural hand movement, camera motion, lighting, duration, and frame rate. Do not generate a new environment and do not replace any subject.\nApply AR compositing directly onto the original footage. {{opt.style.prompt}}\nThe underlying footage must stay pixel-identical: no outpainting, no new buildings, no re-staging of people, no change of framing. Every panel, reticle, and grid must be pinned to a physical surface (a facade, the road plane, a vehicle body); nothing hovers in empty air. All added elements must track the real camera motion perfectly and respect occlusion by real objects. Sound: natural ambience of the real scene plus subtle effect sounds synced to the AR elements.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "No readable letters, words, or numbers inside any AR element. Do not add subtitles, watermarks, logos, or on-screen text unless explicitly requested above. Do not change the identity of any referenced person. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "clip": "/samples/clips/phone-crosswalk.mp4"
+  },
+  "badges": [
+    "🎬1"
+  ]
+}

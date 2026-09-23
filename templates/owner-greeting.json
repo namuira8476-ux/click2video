@@ -1,0 +1,123 @@
+{
+  "id": "owner-greeting",
+  "name": "사장님 인사 영상",
+  "tagline": "사장님 사진 한 장과 인사말만 넣으면 한국어로 직접 말하는 영상이 됩니다.",
+  "category": "smallbiz",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 10,
+    "ratio": "9:16"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "9:16",
+      "16:9",
+      "1:1"
+    ]
+  },
+  "slots": [
+    {
+      "key": "owner",
+      "kind": "image",
+      "label": "사장님 사진",
+      "source": "user",
+      "required": true,
+      "hint": "얼굴이 정면으로 잘 보이는 사진"
+    },
+    {
+      "key": "voice",
+      "kind": "audio",
+      "label": "목소리 샘플 (선택, 2~15초)",
+      "source": "user",
+      "required": false,
+      "hint": "넣으면 이 목소리로 말합니다"
+    },
+    {
+      "key": "nameImg",
+      "kind": "image",
+      "label": "가게 이름",
+      "source": "textImage",
+      "required": false,
+      "optionKey": "storeName",
+      "textStyle": "dark"
+    }
+  ],
+  "options": [
+    {
+      "key": "line",
+      "type": "text",
+      "label": "인사말 (한국어로 그대로 말합니다)",
+      "maxLen": 150,
+      "required": true,
+      "placeholder": "예: 안녕하세요, 카페 봄날 사장입니다. 매일 아침 직접 구운 빵으로 기다리고 있을게요!"
+    },
+    {
+      "key": "storeName",
+      "type": "text",
+      "label": "가게 이름 자막 (선택)",
+      "maxLen": 20,
+      "placeholder": "예: 카페 봄날"
+    },
+    {
+      "key": "setting",
+      "type": "select",
+      "label": "배경",
+      "values": [
+        {
+          "value": "counter",
+          "label": "카운터 앞",
+          "prompt": "standing behind the counter of their own shop, warm interior light"
+        },
+        {
+          "value": "entrance",
+          "label": "가게 입구",
+          "prompt": "standing at the entrance of their shop with the storefront behind, soft daylight"
+        },
+        {
+          "value": "kitchen",
+          "label": "주방·작업 공간",
+          "prompt": "in their kitchen or workspace, sleeves rolled up, practical lighting"
+        }
+      ],
+      "default": "counter"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.owner}} is the character reference: preserve this person's face, hair, skin tone, and body exactly.{{#slots.voice}} {{ref.voice}} is the voice reference: match its timbre, tone, pitch, and accent exactly.{{/slots.voice}}{{#slots.nameImg}} {{ref.nameImg}} shows the exact store name for a small caption; interpret it as an image, not text, and reproduce every character exactly.{{/slots.nameImg}}\nCreate a {{duration}}-second friendly greeting video of a small-business owner {{opt.setting.prompt}}. Medium close-up, eye contact with the camera, natural warm smile, small welcoming hand gesture. The owner speaks in Korean with natural pacing and accurate lip sync, saying exactly: \"{{opt.line}}\"\nKeep the performance sincere and unpolished, like a real shop owner, not an actor. Quiet ambient shop sound, no background music.{{#slots.nameImg}} During the final 2 seconds, show the store name from {{ref.nameImg}} as a small clean caption in the lower third.{{/slots.nameImg}}\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add subtitles, watermarks, logos, or on-screen text other than the caption described above. Do not change the identity of the referenced person. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": true,
+  "sampleInputs": {
+    "owner": "/samples/owner-greeting/owner.png",
+    "voice": "/samples/voice/korean-greeting.wav"
+  },
+  "badges": [
+    "📷1",
+    "🎤"
+  ],
+  "sampleOptions": {
+    "line": "안녕하세요, 카페 봄날입니다. 오늘도 갓 구운 빵과 따뜻한 커피로 기다릴게요.",
+    "storeName": "카페 봄날"
+  }
+}

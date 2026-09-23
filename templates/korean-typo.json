@@ -1,0 +1,110 @@
+{
+  "id": "korean-typo",
+  "name": "한국어 키네틱 타이포",
+  "tagline": "문구만 입력하면 검정 배경 위에서 한글이 춤추는 타이포 영상이 됩니다.",
+  "category": "effects",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 8,
+    "ratio": "16:9"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      15
+    ],
+    "ratios": [
+      "16:9",
+      "9:16",
+      "1:1"
+    ]
+  },
+  "slots": [
+    {
+      "key": "textImg",
+      "kind": "image",
+      "label": "문구",
+      "source": "textImage",
+      "required": true,
+      "optionKey": "text",
+      "textStyle": "dark"
+    }
+  ],
+  "options": [
+    {
+      "key": "text",
+      "type": "text",
+      "label": "문구 (한국어 가능, 줄바꿈은 공백으로)",
+      "maxLen": 60,
+      "required": true,
+      "placeholder": "예: 한 글자씩 반짝이다"
+    },
+    {
+      "key": "accent",
+      "type": "select",
+      "label": "포인트 컬러",
+      "values": [
+        {
+          "value": "red",
+          "label": "레드",
+          "prompt": "deep red"
+        },
+        {
+          "value": "lime",
+          "label": "라임",
+          "prompt": "electric lime green"
+        },
+        {
+          "value": "white",
+          "label": "화이트만",
+          "prompt": "no color accents at all, pure white only"
+        }
+      ],
+      "default": "red"
+    },
+    {
+      "key": "mood",
+      "type": "select",
+      "label": "무드",
+      "values": [
+        {
+          "value": "sharp",
+          "label": "날카롭고 기계적인",
+          "prompt": "dark, cool, sharp, rational, and mechanical, with a subtle sense of aggression"
+        },
+        {
+          "value": "soft",
+          "label": "부드럽고 우아한",
+          "prompt": "calm, elegant, and fluid, with gentle easing and generous pauses"
+        }
+      ],
+      "default": "sharp"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.textImg}} shows the exact Korean characters to use. This content must be interpreted as an image, not processed as text; reproduce every character exactly as drawn, in the same order, and never add, remove, or replace any character.\nCreate a {{duration}}-second experimental Korean kinetic-typography film set entirely against a pure black background. The only elements allowed on screen are the white Korean characters from {{ref.textImg}}, with occasional {{opt.accent.prompt}} typographic offsets or accents. Do not include people, scenery, photography, illustrations, icons, products, logos, 3D objects, English titles, fixed UI elements, numbering, timers, borders, grids, or any decorative graphics.\nThis is not a subtitle video. The characters are the sole visual subject: they rapidly appear, scale up, rotate, compress, collide, fragment, multiply, invert, and reassemble across the black canvas, like an experimental type-motion film by a graphic designer. Keep the mood {{opt.mood.prompt}}. The execution stays premium, restrained, cohesive, and visually controlled. For the final 1.5 seconds the complete phrase settles, fully legible and centered. Sound: precise mechanical clicks and whooshes synced to each movement, plus a minimal electronic pulse.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "No watermarks, no logos, no characters other than those shown in the reference image. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {},
+  "badges": [
+    "✍️"
+  ],
+  "sampleOptions": {
+    "text": "한 글자씩 반짝이다"
+  }
+}

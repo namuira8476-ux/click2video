@@ -1,0 +1,77 @@
+{
+  "id": "poster-motion",
+  "name": "전단지 살리기",
+  "tagline": "이미 만든 포스터·메뉴판 사진 한 장이 움직이는 영상이 됩니다. 큰 글씨 3~5단어짜리에 맞습니다. 글자를 확인하고 쓰세요.",
+  "category": "smallbiz",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 8,
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "ratios": [
+      "adaptive",
+      "9:16",
+      "3:4",
+      "1:1",
+      "16:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "poster",
+      "kind": "image",
+      "label": "포스터·메뉴판·전단 사진",
+      "source": "user",
+      "required": true,
+      "hint": "정면에서 평평하게, 그림자 없이. 글씨가 크고 적을수록 정확합니다"
+    }
+  ],
+  "options": [
+    {
+      "key": "mood",
+      "type": "select",
+      "label": "분위기",
+      "values": [
+        {
+          "value": "lively",
+          "label": "밝고 경쾌한",
+          "prompt": "bright and playful: elements pop in with quick, bouncy, beat-synced motion and a light type-on sound each time text appears"
+        },
+        {
+          "value": "calm",
+          "label": "차분하고 고급스러운",
+          "prompt": "calm and premium: elements fade and drift in slowly with gentle easing, soft ambient music and a subtle whoosh when text appears"
+        }
+      ],
+      "default": "lively"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.poster}} is a printed poster. Animate it as a motion poster while preserving its exact layout, border, frame, colors, photo, and typography.\nThe poster's own lettering is the only text allowed, and every character must stay exactly as printed — same glyphs, same spelling, same size, same position — never redrawn, reflowed, restyled, or replaced. Treat the printed text as an image to reproduce faithfully, not as text to rewrite.\nThe first frame shows the poster with its border, background and photo present but every text block still hidden; no lettering is visible until it is revealed, and the complete poster must not appear before the last text block has come in. Bring the poster to life on a time budget across the whole {{duration}} seconds: the background and photo settle in first with a slow, subtle parallax during the first quarter; then each block of text appears one at a time, largest first, in its original position, spaced evenly through the middle half; the complete poster is fully assembled only in the last quarter and holds still and sharp for the final 2 seconds. {{opt.mood.prompt}}\nThe camera stays square-on to the poster with at most a very slow push-in; no tilting, rotating, or perspective changes. Nothing may be added around or over the poster.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not change, add, remove, or misspell any character on the poster. Do not add new text, watermarks, logos, or decorative graphics. Do not warp, tilt, or crop the poster. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "poster": "/samples/poster-motion/poster.png"
+  },
+  "badges": [
+    "📷1"
+  ]
+}

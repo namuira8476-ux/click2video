@@ -1,0 +1,120 @@
+{
+  "id": "menu-spotlight",
+  "name": "메뉴 스포트라이트",
+  "tagline": "음식·상품 사진 한 장으로 프리미엄 런칭 광고를 만듭니다. 메뉴명과 가격이 한국어로 표시됩니다.",
+  "category": "smallbiz",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 8,
+    "ratio": "9:16"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      15
+    ],
+    "ratios": [
+      "9:16",
+      "16:9",
+      "1:1"
+    ]
+  },
+  "slots": [
+    {
+      "key": "food",
+      "kind": "image",
+      "label": "메뉴·상품 사진",
+      "source": "user",
+      "required": true,
+      "hint": "배경이 단순할수록 좋습니다"
+    },
+    {
+      "key": "nameImg",
+      "kind": "image",
+      "label": "메뉴명",
+      "source": "textImage",
+      "required": true,
+      "optionKey": "menuName",
+      "textStyle": "dark"
+    },
+    {
+      "key": "priceImg",
+      "kind": "image",
+      "label": "가격",
+      "source": "textImage",
+      "required": false,
+      "optionKey": "price",
+      "textStyle": "dark"
+    }
+  ],
+  "options": [
+    {
+      "key": "menuName",
+      "type": "text",
+      "label": "메뉴명 (한국어 가능)",
+      "maxLen": 20,
+      "required": true,
+      "placeholder": "예: 흑임자 크림 라떼"
+    },
+    {
+      "key": "price",
+      "type": "text",
+      "label": "가격 (선택)",
+      "maxLen": 15,
+      "placeholder": "예: 6,500원"
+    },
+    {
+      "key": "style",
+      "type": "select",
+      "label": "스타일",
+      "values": [
+        {
+          "value": "black",
+          "label": "블랙 스튜디오",
+          "prompt": "a pure black background with studio-quality rim lighting and ultra-slow rotating macro close-ups"
+        },
+        {
+          "value": "wood",
+          "label": "우드 테이블",
+          "prompt": "a warm wooden table by a window with soft natural light and slow dolly moves"
+        },
+        {
+          "value": "bright",
+          "label": "화이트 데이라이트",
+          "prompt": "a bright white surface with airy daylight and crisp overhead and 45-degree angles"
+        }
+      ],
+      "default": "black"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.food}} is the product reference. Preserve its exact shape, colors, texture, plating, and packaging.\n{{ref.nameImg}} shows the exact menu name to display{{#slots.priceImg}} and {{ref.priceImg}} shows the exact price{{/slots.priceImg}}. This content must be interpreted as an image, not processed as text; reproduce every character exactly as drawn.\nCreate a {{duration}}-second premium new-menu launch film set on {{opt.style.prompt}}. Oversized minimalist typography, generous negative space, one consistent visual system, atmospheric electronic soundtrack with a soft sizzle or pour sound if appropriate. Shot list: macro texture detail, a slow reveal of the whole item, a final hero shot. In the final 2.5 seconds show the menu name from {{ref.nameImg}} large and centered{{#slots.priceImg}} with the price from {{ref.priceImg}} beneath it in a smaller size, reproduced exactly as drawn{{/slots.priceImg}}. Text must be crisp and correctly spelled.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add watermarks, logos, or any text other than the menu name and price described above. No cartoon styling, no cluttered backgrounds. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "food": "/samples/menu-spotlight/food.png"
+  },
+  "badges": [
+    "📷1",
+    "✍️"
+  ],
+  "sampleOptions": {
+    "menuName": "허니 양념 순살치킨",
+    "price": "18,900원"
+  }
+}

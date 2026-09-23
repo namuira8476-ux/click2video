@@ -1,0 +1,117 @@
+{
+  "id": "before-after",
+  "name": "전후 비교 영상",
+  "tagline": "전·후 사진 두 장이 끊김 없이 변해가는 영상이 됩니다. 세차·네일·인테리어·청소에 딱 맞습니다.",
+  "category": "smallbiz",
+  "mode": "first-last",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 6,
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "ratios": [
+      "adaptive"
+    ]
+  },
+  "slots": [
+    {
+      "key": "before",
+      "kind": "image",
+      "label": "전(Before) 사진",
+      "source": "user",
+      "required": true,
+      "hint": "같은 자리·같은 각도에서 찍은 사진일수록 자연스럽습니다"
+    },
+    {
+      "key": "after",
+      "kind": "image",
+      "label": "후(After) 사진",
+      "source": "user",
+      "required": true,
+      "hint": "전 사진과 같은 구도. 결과 화면비는 이 사진들을 따릅니다"
+    }
+  ],
+  "options": [
+    {
+      "key": "service",
+      "type": "select",
+      "label": "어떤 변화인가요",
+      "values": [
+        {
+          "value": "carwash",
+          "label": "세차·디테일링",
+          "prompt": "a car being washed and detailed: dirt and dust lift away, water sheets off, the paint comes up glossy and clean"
+        },
+        {
+          "value": "nail",
+          "label": "네일·뷰티",
+          "prompt": "a nail or beauty service: the treated area transforms from bare to finished, with polish, color and shine appearing smoothly"
+        },
+        {
+          "value": "interior",
+          "label": "인테리어·청소·정리",
+          "prompt": "a space being renovated, cleaned or organized: clutter clears, surfaces brighten, and the finished look settles into place"
+        },
+        {
+          "value": "laundry",
+          "label": "세탁·수선",
+          "prompt": "a garment or item being cleaned or repaired: stains fade, wrinkles smooth out, and the item returns to like-new condition"
+        },
+        {
+          "value": "other",
+          "label": "기타",
+          "prompt": "a before-and-after transformation of the same subject"
+        }
+      ],
+      "default": "carwash"
+    },
+    {
+      "key": "caption",
+      "type": "select",
+      "label": "자막",
+      "values": [
+        {
+          "value": "en",
+          "label": "BEFORE → AFTER (영문)",
+          "prompt": "Show the word \"BEFORE\" in small clean white capitals in the top-left corner from the first frame until the moment the change begins, then fade it out; fade in the word \"AFTER\" in the same style and position once the change is complete and hold it through the final frame. No other text anywhere."
+        },
+        {
+          "value": "none",
+          "label": "자막 없음",
+          "prompt": "No on-screen text: no letterforms, words, or numbers anywhere."
+        }
+      ],
+      "default": "en"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200,
+      "placeholder": "예: 물방울이 튀는 느낌으로"
+    }
+  ],
+  "prompt": "Image 1 is the exact opening frame and Image 2 is the exact closing frame; the video must begin on Image 1 and end on Image 2.\nShow {{opt.service.prompt}}, as one continuous shot with no cuts, dissolves, or black frames. Keep the camera position, framing, lens and background locked exactly as in the photos; only the subject changes, progressing naturally and evenly across the whole clip so the state at every moment sits between the two photos. Do not add people, hands, tools, or objects that are not in the photos. Any water, foam, dust or debris may appear only on the subject and the ground directly beneath it; the wall and background must stay completely unchanged — no spray arcs, mist, jets, hoses or light streaks on or in front of the background, and nothing may enter from off-screen. Photoreal, subtle natural motion, clean soft sound design with a gentle satisfying finish.\n{{opt.caption.prompt}}\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not change the framing or camera between the two photos. Do not add watermarks, logos, or text other than the caption described above. Do not add people. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "before": "/samples/before-after/before.png",
+    "after": "/samples/before-after/after.png"
+  },
+  "badges": [
+    "📷2"
+  ]
+}

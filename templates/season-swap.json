@@ -1,0 +1,114 @@
+{
+  "id": "season-swap",
+  "name": "계절 갈아입히기",
+  "tagline": "여름에 찍은 가게 앞이 벚꽃·단풍·눈 내리는 장면으로 바뀝니다. 시즌 홍보를 미리 만들어 두세요.",
+  "category": "smallbiz",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 8,
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "ratios": [
+      "adaptive",
+      "9:16",
+      "16:9",
+      "1:1"
+    ]
+  },
+  "slots": [
+    {
+      "key": "scene",
+      "kind": "image",
+      "label": "가게 외관 사진",
+      "source": "user",
+      "required": false,
+      "hint": "간판이 작거나 없는 사진일수록 글자가 안전합니다"
+    },
+    {
+      "key": "clip",
+      "kind": "video",
+      "label": "가게 외관 영상 (선택, 사진 대신)",
+      "source": "user",
+      "required": false,
+      "hint": "2~15초. 넣으면 사진 대신 이 영상의 계절을 바꿉니다"
+    },
+    {
+      "key": "notice",
+      "kind": "image",
+      "label": "연출 영상 안내",
+      "source": "fixed",
+      "required": true,
+      "refId": "notice-staged"
+    }
+  ],
+  "oneOf": [
+    [
+      "scene",
+      "clip"
+    ]
+  ],
+  "refAliases": {
+    "source": [
+      "clip",
+      "scene"
+    ]
+  },
+  "options": [
+    {
+      "key": "season",
+      "type": "select",
+      "label": "계절",
+      "values": [
+        {
+          "value": "spring",
+          "label": "봄 · 벚꽃",
+          "prompt": "early spring: cherry blossom trees in full bloom around the scene, a few petals drifting slowly through the air, soft warm daylight"
+        },
+        {
+          "value": "rain",
+          "label": "장마 · 비",
+          "prompt": "a rainy day: gentle steady rain, wet reflective pavement, soft overcast light, small ripples in puddles"
+        },
+        {
+          "value": "autumn",
+          "label": "가을 · 단풍",
+          "prompt": "mid autumn: trees turned red and gold, a few leaves drifting down, low warm afternoon sun"
+        },
+        {
+          "value": "winter",
+          "label": "겨울 · 눈",
+          "prompt": "a calm winter day: light snow falling gently, a thin even layer of fresh snow on ledges and the ground, cool soft daylight; light snow only, no blizzard"
+        }
+      ],
+      "default": "winter"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.source}} is the storefront to keep. Change only the season and weather to {{opt.season.prompt}}.\nEverything built or printed stays exactly as it is: the building, doors, windows, awning, furniture, plants, and every sign. All lettering on signs, boards and windows must remain pixel-identical to {{ref.source}} — never redraw, restyle, blur, translate, or replace a single character. Keep the camera and framing fixed{{#slots.clip}} and keep the original motion and timing of the footage{{/slots.clip}}{{^slots.clip}}, with only a very slow, subtle push-in{{/slots.clip}}.\n{{ref.notice}} is a small notice strip; show it exactly as drawn as a small strip no wider than a quarter of the frame, in the bottom-right corner, for the entire video; it must not cover the storefront. No other text may appear.\nPhotoreal, natural ambient sound that matches the weather.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not alter, add, or remove any signage or lettering. Do not add people or vehicles that are not in the source. No blizzards, storms, or dramatic weather. No watermarks or logos. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "scene": "/samples/gate/store-sign.png"
+  },
+  "badges": [
+    "📷1"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "style-transform",
+  "name": "스타일 변신",
+  "tagline": "반려동물·사물 사진을 클레이·애니·복셀·페이퍼로 다시 태어나게 합니다.",
+  "category": "effects",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 6,
+    "ratio": "1:1"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "adaptive",
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4",
+      "21:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "subject",
+      "kind": "image",
+      "label": "피사체 사진",
+      "source": "user",
+      "required": true,
+      "hint": "반려동물·사물·캐릭터가 가장 잘 변합니다. 사람 얼굴은 모델이 실사로 유지하려는 성향이 있어 배경·소품 위주로만 바뀔 수 있습니다."
+    }
+  ],
+  "options": [
+    {
+      "key": "style",
+      "type": "select",
+      "label": "스타일",
+      "values": [
+        {
+          "value": "clay",
+          "label": "클레이",
+          "prompt": "Claymation. A handmade stop-motion clay animation shot on a miniature plasticine set: matte plasticine surfaces with visible thumbprints and sculpting tool marks, lumpy handmade edges, clay fur and hair modelled as sculpted clumps, warm practical lighting, stop-motion cadence."
+        },
+        {
+          "value": "anime",
+          "label": "2D 애니",
+          "prompt": "2D cel animation. A hand-drawn animated film with flat colors, bold ink outlines, a high-contrast palette and abstract motion-graphic backgrounds, in constant graphic motion."
+        },
+        {
+          "value": "voxel",
+          "label": "복셀(마인크래프트풍)",
+          "prompt": "Voxel animation. Everything is built from chunky 3D pixel-art cubes in the style of Minecraft, with blocky silhouettes, physically correct motion, real shadows and transmitted light."
+        },
+        {
+          "value": "paper",
+          "label": "페이퍼 콜라주",
+          "prompt": "Cut-paper collage animation. Every element is a layered piece of textured paper with visible cut edges and drop shadows, moving with stop-motion jitter."
+        }
+      ],
+      "default": "clay"
+    },
+    {
+      "key": "action",
+      "type": "select",
+      "label": "동작",
+      "values": [
+        {
+          "value": "idle",
+          "label": "자연스럽게 서 있기",
+          "prompt": "the subject moves naturally with subtle breathing and small gestures"
+        },
+        {
+          "value": "wave",
+          "label": "손 흔들기",
+          "prompt": "the subject looks at the camera and waves"
+        },
+        {
+          "value": "spin",
+          "label": "360° 회전",
+          "prompt": "the subject turns a full 360 degrees"
+        },
+        {
+          "value": "walk",
+          "label": "카메라로 걸어오기",
+          "prompt": "the subject walks toward the camera and stops in a medium shot"
+        }
+      ],
+      "default": "idle"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{opt.style.prompt}}\nThis is not live action and not a photograph: every single thing on screen is made of the medium described above, including the main character.\nThe character is a handmade puppet version of the subject in {{ref.subject}}. Use {{ref.subject}} only for the design — silhouette, hairstyle shape, colors and color blocking — and rebuild it in the medium with simplified, slightly exaggerated proportions. Do not copy the photographic surface of {{ref.subject}}.\nAction: {{opt.action.prompt}}. Camera: very slow push-in that stops early — the whole body stays inside the frame in every frame, with margin on all four sides. Add a soft, playful soundtrack that matches the material.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not output photorealistic or live-action imagery. Do not replace the subject with a different person or character. Do not crop the head or the feet. Do not add subtitles, watermarks, logos, or on-screen text. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": true,
+  "sampleInputs": {
+    "subject": "/samples/style-transform/subject.png"
+  },
+  "badges": [
+    "📷1"
+  ]
+}

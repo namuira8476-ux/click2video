@@ -1,0 +1,128 @@
+{
+  "id": "wear-swap",
+  "name": "내 상품 갈아끼우기",
+  "tagline": "모델 없이 착용컷을 만듭니다. 무지 옷·로고 없는 소품 사진 한 장이면 내장 영상 속 인물이 내 상품을 입고 듭니다.",
+  "category": "smallbiz",
+  "defaults": {
+    "resolution": "768P",
+    "duration": "clip",
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "ratios": [
+      "adaptive",
+      "9:16",
+      "1:1",
+      "16:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "product",
+      "kind": "image",
+      "label": "내 상품 사진",
+      "source": "user",
+      "required": true,
+      "hint": "무지 의류나 로고 없는 소품만. 글자·로고가 있는 상품은 깨집니다"
+    },
+    {
+      "key": "clipUpload",
+      "kind": "video",
+      "label": "내 영상 (선택)",
+      "source": "user",
+      "required": false,
+      "hint": "직접 찍은 영상 2~15초. 넣으면 아래 내장 장면 대신 이 영상의 옷·소품을 바꿉니다"
+    },
+    {
+      "key": "clip",
+      "kind": "video",
+      "label": "내장 장면",
+      "source": "option",
+      "required": false,
+      "optionKey": "scene",
+      "skipIfSlot": "clipUpload"
+    }
+  ],
+  "oneOf": [
+    [
+      "clipUpload",
+      "clip"
+    ]
+  ],
+  "refAliases": {
+    "motion": [
+      "clipUpload",
+      "clip"
+    ]
+  },
+  "options": [
+    {
+      "key": "scene",
+      "type": "select",
+      "label": "내장 장면 (프리뷰를 눌러 미리 보기)",
+      "values": [
+        {
+          "value": "__placeholder__",
+          "label": "준비 중"
+        }
+      ],
+      "default": "__placeholder__",
+      "dynamic": "stock"
+    },
+    {
+      "key": "kind",
+      "type": "select",
+      "label": "상품 종류",
+      "values": [
+        {
+          "value": "top",
+          "label": "상의 (티셔츠·니트)",
+          "prompt": "the plain top worn by the person"
+        },
+        {
+          "value": "held",
+          "label": "손에 든 소품 (컵·가방·소형 제품)",
+          "prompt": "the plain object held or placed by the person"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "key": "color",
+      "type": "text",
+      "label": "상품 색상·소재 (한 줄, 영어 또는 한국어)",
+      "maxLen": 80,
+      "placeholder": "예: 머스터드 옐로우 면 티셔츠"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.motion}} is the source footage; keep it exactly as it is — the person's face, body, movement and timing, the camera, the lighting, and the background all stay unchanged.\nReplace only {{opt.kind.prompt}} with the product in {{ref.product}}. The product's exact color, material, shape, fit and details must match {{ref.product}}{{#opt.color}} — specifically {{opt.color}}, with smooth, even, uniform color across the whole item and no patches, mottling, show-through or ghost prints{{/opt.color}} and must follow the person's motion naturally, with correct folds, shading and contact shadows. Everything that is not the product stays pixel-faithful to the source.\nDo not add any text, print, logo, or label to the product or anywhere in the frame. Photoreal.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not change the person's identity, face, pose, or the camera. Do not add text, prints, logos, or labels. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": true,
+  "sampleInputs": {
+    "product": "/samples/wear-swap/product.png"
+  },
+  "badges": [
+    "📷1"
+  ],
+  "sampleOptions": {
+    "color": "saturated marigold mustard-yellow plain cotton t-shirt"
+  }
+}

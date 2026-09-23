@@ -1,0 +1,150 @@
+{
+  "id": "voice-clone-dub",
+  "name": "보이스 클론 더빙",
+  "tagline": "내 목소리로, 원하는 언어로, 영상 속 인물이 새 대사를 말합니다.",
+  "category": "edit",
+  "defaults": {
+    "resolution": "768P",
+    "duration": "clip",
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "adaptive",
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4",
+      "21:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "clip",
+      "kind": "video",
+      "label": "영상",
+      "source": "user",
+      "required": true,
+      "hint": "말하는 인물의 얼굴이 보이는 영상"
+    },
+    {
+      "key": "voice",
+      "kind": "audio",
+      "label": "목소리 샘플(2~15초)",
+      "source": "user",
+      "required": true,
+      "hint": "잡음 없는 wav/mp3"
+    }
+  ],
+  "options": [
+    {
+      "key": "line",
+      "type": "text",
+      "label": "대사",
+      "maxLen": 200,
+      "placeholder": "예: 안녕하세요, 클릭투비디오입니다. 오늘도 좋은 하루 보내세요.",
+      "required": true
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "label": "언어",
+      "values": [
+        {
+          "value": "ko",
+          "label": "한국어",
+          "prompt": "Korean"
+        },
+        {
+          "value": "en",
+          "label": "영어",
+          "prompt": "English"
+        },
+        {
+          "value": "ja",
+          "label": "일본어",
+          "prompt": "Japanese"
+        },
+        {
+          "value": "zh",
+          "label": "중국어",
+          "prompt": "Mandarin Chinese"
+        },
+        {
+          "value": "fr",
+          "label": "프랑스어",
+          "prompt": "French"
+        },
+        {
+          "value": "de",
+          "label": "독일어",
+          "prompt": "German"
+        },
+        {
+          "value": "es",
+          "label": "스페인어",
+          "prompt": "Spanish"
+        },
+        {
+          "value": "it",
+          "label": "이탈리아어(실험적)",
+          "prompt": "Italian (experimental)"
+        },
+        {
+          "value": "pt",
+          "label": "포르투갈어(실험적)",
+          "prompt": "Portuguese (experimental)"
+        },
+        {
+          "value": "ru",
+          "label": "러시아어(실험적)",
+          "prompt": "Russian (experimental)"
+        },
+        {
+          "value": "id",
+          "label": "인도네시아어(실험적)",
+          "prompt": "Indonesian (experimental)"
+        }
+      ],
+      "default": "ko"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.clip}} is the video source; preserve its visuals, camera, timing, body motion and hand gestures frame-for-frame. {{ref.voice}} is the voice reference: match its timbre, tone, pitch, and accent exactly.\nThe on-screen character in {{ref.clip}} says the following line in {{opt.language.prompt}}, with natural pacing that fits the clip length: \"{{opt.line}}\"\nAdjust lip movement, jaw, breathing, and facial performance subtly so they match the new line. Keep the original body motion, hand gestures, and head movement frame-for-frame; keep the original room tone under the new voice with no digital silence between phrases. Do not add music.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add subtitles, watermarks, logos, or on-screen text unless explicitly requested above. Do not change the identity of any referenced person. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": true,
+  "sampleInputs": {
+    "clip": "/samples/clips/talking-owner.mp4",
+    "voice": "/samples/voice/korean-greeting.wav"
+  },
+  "badges": [
+    "🎬1",
+    "🎤"
+  ],
+  "sampleOptions": {
+    "line": "안녕하세요, 클릭투비디오입니다. 오늘도 좋은 하루 보내세요."
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "relight",
+  "name": "낮→밤 릴라이팅",
+  "tagline": "같은 영상, 다른 시간대. 조명만 바꿔 분위기를 새로 만듭니다.",
+  "category": "edit",
+  "defaults": {
+    "resolution": "768P",
+    "duration": "clip",
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "adaptive",
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4",
+      "21:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "clip",
+      "kind": "video",
+      "label": "영상",
+      "source": "user",
+      "required": true,
+      "hint": "2~15초 mp4/mov"
+    }
+  ],
+  "options": [
+    {
+      "key": "time",
+      "type": "select",
+      "label": "시간대·날씨",
+      "values": [
+        {
+          "value": "night",
+          "label": "밤(달빛)",
+          "prompt": "night, with cool moonlight and warm practical lights turning on"
+        },
+        {
+          "value": "golden",
+          "label": "골든아워",
+          "prompt": "golden hour, with long warm shadows and soft haze"
+        },
+        {
+          "value": "dawn",
+          "label": "새벽 블루아워",
+          "prompt": "blue-hour dawn, with cold diffuse light and faint mist"
+        },
+        {
+          "value": "rain",
+          "label": "흐린 비 오는 날",
+          "prompt": "an overcast rainy day, with wet reflective surfaces and diffuse light"
+        },
+        {
+          "value": "neon",
+          "label": "네온 야경",
+          "prompt": "night lit by colorful neon signs, with magenta and cyan reflections"
+        }
+      ],
+      "default": "night"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "Use {{ref.clip}} as the sole video source. Change the lighting of the entire scene to {{opt.time.prompt}}. Keep everything else exactly as it is: the subjects, their movement and timing, the camera movement, and the composition. Sound: natural ambience that matches the new time of day. Shadows, reflections, and skin tones must follow the new light source consistently across the whole clip.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add subtitles, watermarks, logos, or on-screen text unless explicitly requested above. Do not change the identity of any referenced person. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "clip": "/samples/clips/street-noon.mp4"
+  },
+  "badges": [
+    "🎬1"
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "id": "hand-drawn-fx",
+  "name": "손그림 이펙트",
+  "tagline": "영상 속 사람 주위에 빛나는 손그림 낙서를 프레임마다 입힙니다.",
+  "category": "effects",
+  "defaults": {
+    "resolution": "768P",
+    "duration": "clip",
+    "ratio": "adaptive"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "adaptive",
+      "16:9",
+      "9:16",
+      "1:1",
+      "4:3",
+      "3:4",
+      "21:9"
+    ]
+  },
+  "slots": [
+    {
+      "key": "clip",
+      "kind": "video",
+      "label": "영상",
+      "source": "user",
+      "required": true,
+      "hint": "2~15초 mp4/mov"
+    },
+    {
+      "key": "doodle",
+      "kind": "image",
+      "label": "낙서 스타일",
+      "source": "option",
+      "required": true,
+      "optionKey": "palette"
+    }
+  ],
+  "options": [
+    {
+      "key": "palette",
+      "type": "select",
+      "label": "낙서 팔레트",
+      "values": [
+        {
+          "value": "apricot",
+          "label": "살구빛 낙서",
+          "refId": "doodle-apricot"
+        },
+        {
+          "value": "pink",
+          "label": "핑크 브러시",
+          "refId": "doodle-pink"
+        },
+        {
+          "value": "chalk",
+          "label": "화이트 초크",
+          "refId": "doodle-chalk"
+        }
+      ],
+      "default": "apricot"
+    },
+    {
+      "key": "moment",
+      "type": "text",
+      "label": "강조할 순간",
+      "maxLen": 60,
+      "placeholder": "두 사람이 가까워질 때"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "Use {{ref.clip}} as the sole video source and keep it completely unchanged: subjects, camera movement, and timing. Sound: natural ambience of the scene with soft sparkle tones when marks appear. {{ref.doodle}} is the style reference for the hand-drawn marks.\nAdd glowing hand-drawn marks in the style of {{ref.doodle}} around the people in {{ref.clip}}: flat, frame-by-frame doodles with crayon and chalk texture, uneven line weight, and a gentle halo. Start with tiny sparks; as the action builds{{#opt.moment}}, especially when {{opt.moment}}{{/opt.moment}}, the marks multiply into bright radiance. Never cover faces. No 3D CGI, no neon tubes, no uniform vector lines.\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add subtitles, watermarks, logos, or on-screen text unless explicitly requested above. Do not change the identity of any referenced person. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "clip": "/samples/clips/couple-dusk.mp4"
+  },
+  "badges": [
+    "🎬1"
+  ]
+}

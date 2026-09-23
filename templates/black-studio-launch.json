@@ -1,0 +1,99 @@
+{
+  "id": "black-studio-launch",
+  "name": "블랙 스튜디오 제품 런칭",
+  "tagline": "제품 사진 한 장으로 프리미엄 런칭 필름을 완성합니다.",
+  "category": "commerce",
+  "defaults": {
+    "resolution": "768P",
+    "duration": 10,
+    "ratio": "16:9"
+  },
+  "allow": {
+    "resolutions": [
+      "480P",
+      "768P"
+    ],
+    "durations": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ratios": [
+      "16:9",
+      "9:16",
+      "1:1"
+    ]
+  },
+  "slots": [
+    {
+      "key": "product",
+      "kind": "image",
+      "label": "제품 사진",
+      "source": "user",
+      "required": true,
+      "hint": "배경이 단순한 제품 컷 권장"
+    },
+    {
+      "key": "headImg",
+      "kind": "image",
+      "label": "헤드라인",
+      "source": "textImage",
+      "required": false,
+      "optionKey": "headline",
+      "textStyle": "dark"
+    },
+    {
+      "key": "brandImg",
+      "kind": "image",
+      "label": "브랜드명",
+      "source": "textImage",
+      "required": false,
+      "optionKey": "brand",
+      "textStyle": "dark"
+    }
+  ],
+  "options": [
+    {
+      "key": "headline",
+      "type": "text",
+      "label": "헤드라인",
+      "maxLen": 40,
+      "placeholder": "예: Silence, Redefined."
+    },
+    {
+      "key": "brand",
+      "type": "text",
+      "label": "브랜드명(선택)",
+      "maxLen": 20,
+      "placeholder": "예: VELNO"
+    },
+    {
+      "key": "extra",
+      "type": "text",
+      "label": "추가 요청 (선택)",
+      "maxLen": 200
+    }
+  ],
+  "prompt": "{{ref.product}} is the product reference. Preserve its exact shape, materials, colors, label, and proportions.\nCreate a {{duration}}-second premium new-product launch film: pure black background, crisp continuous rim light plus a soft top key so the product silhouette never merges into the black background, ultra-slow rotating close-ups, macro details of the surface, and an atmospheric electronic soundtrack. Generous negative space, one consistent visual system.\n{{#slots.headImg}}{{ref.headImg}} shows the exact headline. This content must be interpreted as an image, not processed as text; reproduce every character exactly as drawn, with no letter added, dropped, or altered. Show it in oversized minimalist lightweight sans-serif in the empty black space beside or below the product, never crossing the product silhouette, fading in and holding fully legible for at least two seconds before the ending.{{/slots.headImg}}\n{{^slots.headImg}}No on-screen text, no letterforms, no placeholder words anywhere.{{/slots.headImg}}\n{{#slots.brandImg}}End on the brand name from {{ref.brandImg}}, centered on black in small tracked-out capitals, again reproducing every character exactly as drawn without restyling any letterform.{{/slots.brandImg}}\n{{#opt.extra}}Additional user request (lower priority than everything above): \"{{opt.extra}}\"{{/opt.extra}}",
+  "negative": "Do not add subtitles, watermarks, logos, or any text other than the reference text images described above. Do not restyle, respell, or substitute any character. No gore, nudity, or copyrighted characters.",
+  "requiresConsent": false,
+  "sampleInputs": {
+    "product": "/samples/black-studio-launch/product.png"
+  },
+  "badges": [
+    "📷1",
+    "✍️"
+  ],
+  "sampleOptions": {
+    "headline": "Silence, Redefined.",
+    "brand": "VELNO"
+  }
+}
