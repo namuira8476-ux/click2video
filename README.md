@@ -48,6 +48,15 @@ npm run dev          # http://localhost:3000
 - 방문자 구분은 서버가 발급·서명한 HttpOnly 쿠키(`c2v_uid`)로 합니다. 다른 사람의 작업·업로드·결과는 보이지 않습니다.
 - 서버 키 폴백은 `ALLOW_SERVER_KEY=1` 일 때만 열립니다. 기본이 꺼짐이라 설정을 빠뜨려도 운영자 계정으로 과금되지 않습니다.
 
+### 결과 영상은 방문자 기기에 저장
+
+영상이 완성되면 브라우저가 곧바로 받아 **이 기기의 브라우저 저장소(IndexedDB)** 에 넣고, "내 작업" 목록과 상세 화면은 그 사본을 재생합니다(카드의 💾 표시). 다운로드 버튼도 기기 사본에서 바로 저장합니다.
+
+- 원격 주소(R2 가 없으면 fal 이 호스팅)는 영구 보관이 아니지만, 기기 사본은 원격이 사라져도 남습니다.
+- 서버를 거치지 않습니다 — fal 미디어 주소는 CORS 를 허용하고, 로컬 모드의 결과 파일은 같은 오리진입니다.
+- 브라우저의 사이트 데이터를 지우거나 다른 기기·브라우저로 들어오면 사본이 없습니다. 오래 보관하려면 다운로드하세요.
+- 작업 기록(템플릿·옵션·상태)은 진행 관리를 위해 계속 서버 DB 에 남습니다. 원격 영상도 fal(또는 R2)에 그대로 있습니다.
+
 로컬에서 배포와 같은 조건으로 확인하려면 `.env.local` 에 아래를 넣고 dev 서버를 재시작합니다(확인 후 지우세요).
 
 ```
@@ -101,6 +110,7 @@ R2 는 대시보드에서 약관 동의로만 켤 수 있습니다. 켠 뒤 `npm
 | DB | better-sqlite3 (`data/`) | D1 |
 | 업로드 | `storage/uploads/` | R2 가 있으면 R2, 없으면 fal 스토리지 |
 | 결과 영상 | `storage/results/` | R2 가 있으면 R2, 없으면 fal URL |
+| 결과 영상 (내 작업) | **방문자 브라우저(IndexedDB)에 사본 저장** | **방문자 브라우저(IndexedDB)에 사본 저장** |
 | 샘플·레퍼런스 | `public/` 파일 | Workers 정적 자산 — fal 이 `PUBLIC_BASE_URL` 로 가져감 |
 | 문구 이미지 | 서버에서 sharp 로 렌더 | 브라우저 캔버스로 렌더 후 업로드 |
 | 템플릿 정의 | `templates/*.json` 직접 읽기 | 빌드 시 `src/generated/static-data.ts` 로 인라인 |
@@ -208,6 +218,7 @@ src/lib/templates/        템플릿 스키마 · 로더 · 프롬프트 렌더�
 src/lib/jobs/             작업 서비스 · 러너(stepJob) · 자산 해석
 src/lib/identity.ts       방문자 쿠키 발급·서명 검증
 src/lib/request-context.ts 요청의 fal 키·소유자 읽기
+src/lib/client/local-videos.ts 결과 영상 기기 저장(IndexedDB)
 src/proxy.ts              방문자 쿠키 발급 (Next 16 의 middleware)
 src/app/api/              templates · uploads · estimate · jobs · files · me · key/verify
 cf/worker.ts              Cloudflare 워커 진입점

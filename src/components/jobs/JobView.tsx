@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import type { PublicJob } from "@/lib/jobs/serialize";
 import { fetcher, formatUsd, postJson } from "@/lib/client/fetcher";
+import { formatBytes, requestPersist } from "@/lib/client/local-videos";
+import { useLocalVideo } from "@/lib/client/use-local-video";
 
 const STEPS: { key: PublicJob["status"][]; label: string }[] = [
   { key: ["queued"], label: "대기" },
@@ -34,6 +36,9 @@ export function JobView({ id, initial }: { id: string; initial: PublicJob }) {
     refreshInterval: (d) => (d && DONE.includes(d.job.status) ? 0 : 3000),
   });
   const job = data?.job ?? initial;
+  // 완성된 영상은 이 기기(브라우저)에 받아 두고 그 사본을 재생한다 — 원격 주소는 영구 보관이 아니다.
+  const video = useLocalVideo(job.id, job.status === "succeeded" ? job.resultUrl : null, { priority: true });
+  const downloadHref = video.localUrl ?? video.src;
   const stepping = useRef(false);
 
   // 내 키는 브라우저에만 있으므로 서버가 혼자 작업을 진행시킬 수 없다.
@@ -75,8 +80,16 @@ export function JobView({ id, initial }: { id: string; initial: PublicJob }) {
 
       <div className="grid lg:grid-cols-[3fr_2fr] gap-8 items-start">
         <section className="rounded-card border border-border bg-card overflow-hidden">
-          {job.status === "succeeded" && job.resultUrl ? (
-            <video src={job.resultUrl} poster={job.posterUrl ?? undefined} controls autoPlay muted loop playsInline className="w-full max-h-[70vh] bg-black" />
+          {job.status === "succeeded" && video.src ? (
+            <video src={video.src} poster={job.posterUrl ?? undefined} controls autoPlay muted loop playsInline className="w-full max-h-[70vh] bg-black" />
+          ) : job.status === "succeeded" && job.resultUrl ? (
+            // 기기 사본을 찾는 잠깐 동안 — 원격 파일을 먼저 받지 않도록 비워 둔다
+            <div className="relative aspect-video bg-black">
+              {job.posterUrl && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={job.posterUrl} alt="" className="absolute inset-0 w-full h-full object-contain opacity-50" />
+              )}
+            </div>
           ) : job.status === "succeeded" ? (
             <div className="relative aspect-video bg-black flex items-center justify-center">
               {job.posterUrl && (
@@ -159,11 +172,19 @@ export function JobView({ id, initial }: { id: string; initial: PublicJob }) {
           </div>
 
           <div className="flex flex-col gap-2">
-            {job.status === "succeeded" && job.resultUrl && (
-              <a href={job.resultUrl} download={`click2video-${job.id}.mp4`} className="btn-accent text-center py-3">
+            {job.status === "succeeded" && downloadHref && (
+              <a
+                href={downloadHref}
+                download={`click2video-${job.id}.mp4`}
+                // 기기 사본(blob:)이 아니면 교차 출처라 download 속성이 무시된다 — 새 탭으로 연다
+                {...(video.localUrl ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                onClick={() => void requestPersist()}
+                className="btn-accent text-center py-3"
+              >
                 ⬇ 다운로드
               </a>
             )}
+            {job.status === "succeeded" && <LocalCopyNote video={video} serverCopy={Boolean(job.resultUrl?.startsWith("/api/files/"))} />}
             <Link href={`/t/${job.templateId}`} className="btn-ghost text-center py-3 text-sm">
               같은 템플릿으로 다시 만들기
             </Link>
@@ -195,4 +216,49 @@ export function JobView({ id, initial }: { id: string; initial: PublicJob }) {
       </div>
     </div>
   );
+}
+
+/** 결과 영상이 이 기기에 저장됐는지 알려 준다. */
+function LocalCopyNote({ video, serverCopy }: { video: ReturnType<typeof useLocalVideo>; serverCopy: boolean }) {
+  const small = "text-[11px] leading-relaxed";
+  switch (video.status) {
+    case "local":
+      return (
+        <p className={`${small} text-muted`}>
+          💾 이 기기(브라우저)에 저장됨{video.bytes ? ` · ${formatBytes(video.bytes)}` : ""}.{" "}
+          {serverCopy
+            ? "서버(이 PC)에도 보관돼 있습니다."
+            : "브라우저는 저장 공간이 부족하거나 오래 방문하지 않으면 사이트 데이터를 지울 수 있으니, 보관하려면 다운로드하세요."}{" "}
+          <button type="button" onClick={() => void video.remove()} className="underline">
+            이 기기에서 지우기
+          </button>
+        </p>
+      );
+    case "saving":
+      return <p className={`${small} text-muted`}>이 기기에 저장하는 중…</p>;
+    case "skipped":
+      return (
+        <p className={`${small} text-muted`}>
+          이 기기에서 지운 영상입니다.{" "}
+          <button type="button" onClick={video.retry} className="underline">
+            다시 기기에 저장
+          </button>
+        </p>
+      );
+    case "unavailable":
+      return <p className={`${small} text-muted`}>이 브라우저에서는 기기 저장을 쓸 수 없습니다 (시크릿 창·사이트 데이터 차단 등). 다운로드해서 보관하세요.</p>;
+    case "failed":
+      return (
+        <p className={`${small} text-danger`}>
+          {video.error ?? "이 기기에 저장하지 못했습니다."}{" "}
+          {video.errorKind !== "gone" && (
+            <button type="button" onClick={video.retry} className="underline">
+              다시 시도
+            </button>
+          )}
+        </p>
+      );
+    default:
+      return null; // checking·none: 아무것도 표시하지 않는다
+  }
 }
